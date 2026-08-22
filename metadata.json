@@ -1,0 +1,6 @@
+{
+  "name": "Vando Construção",
+  "description": "Sistema completo para loja de materiais de construção com cálculo de orçamento em tempo real, agendamento de entregas e painel administrativo.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

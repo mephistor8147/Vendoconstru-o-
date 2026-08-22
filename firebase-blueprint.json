@@ -1,0 +1,162 @@
+{
+  "entities": {
+    "Product": {
+      "title": "Product",
+      "description": "Materiais de construção e produtos cadastrados no estoque",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "category": { "type": "string" },
+        "price": { "type": "number" },
+        "unit": { "type": "string" },
+        "weightKg": { "type": "number" },
+        "description": { "type": "string" },
+        "inStock": { "type": "number" },
+        "minOrder": { "type": "number" },
+        "popular": { "type": "boolean" },
+        "badge": { "type": "string" },
+        "image": { "type": "string" },
+        "isMeliChoice": { "type": "boolean" }
+      },
+      "required": ["id", "name", "category", "price", "unit", "weightKg", "inStock"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Pedidos de materiais, orçamentos e agendamentos de entrega",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "code": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "customer": { "type": "object" },
+        "items": { "type": "array" },
+        "schedule": { "type": "object" },
+        "subtotal": { "type": "number" },
+        "discount": { "type": "number" },
+        "freightCost": { "type": "number" },
+        "total": { "type": "number" },
+        "paymentMethod": { "type": "string" },
+        "installments": { "type": "number" },
+        "status": { "type": "string" },
+        "adminNotes": { "type": "string" },
+        "statusHistory": { "type": "array" }
+      },
+      "required": ["id", "code", "createdAt", "customer", "items", "schedule", "total", "status"]
+    },
+    "Vehicle": {
+      "title": "Vehicle",
+      "description": "Frota de veículos de entrega (Fiorino, Caminhão Toco, Caçamba, Truck)",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "key": { "type": "string" },
+        "name": { "type": "string" },
+        "label": { "type": "string" },
+        "capacity": { "type": "string" },
+        "maxWeightKg": { "type": "number" },
+        "driver": { "type": "string" },
+        "plate": { "type": "string" },
+        "status": { "type": "string" },
+        "description": { "type": "string" },
+        "icon": { "type": "string" }
+      },
+      "required": ["id", "key", "name", "maxWeightKg", "status"]
+    },
+    "Freight": {
+      "title": "Freight",
+      "description": "Bairros, zonas de atendimento da RMR e tabela de fretes",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "freight": { "type": "number" },
+        "timeEst": { "type": "string" },
+        "zone": { "type": "string" },
+        "active": { "type": "boolean" }
+      },
+      "required": ["id", "name", "freight", "timeEst", "zone"]
+    },
+    "StoreConfig": {
+      "title": "StoreConfig",
+      "description": "Configurações institucionais, regras de frete e financeiras da Vando Construção",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "slogan": { "type": "string" },
+        "tagline": { "type": "string" },
+        "cnpj": { "type": "string" },
+        "phone": { "type": "string" },
+        "whatsappRaw": { "type": "string" },
+        "address": { "type": "string" },
+        "openingHours": { "type": "string" },
+        "pixKey": { "type": "string" },
+        "pixName": { "type": "string" },
+        "pixDiscountPercent": { "type": "number" },
+        "maxInstallments": { "type": "number" },
+        "freeShippingThreshold": { "type": "number" },
+        "defaultLossMarginPercent": { "type": "number" }
+      },
+      "required": ["name", "cnpj", "phone", "address"]
+    },
+    "AdminUser": {
+      "title": "AdminUser",
+      "description": "Usuários e colaboradores com acesso ao painel de gestão",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "role": { "type": "string" },
+        "avatar": { "type": "string" },
+        "active": { "type": "boolean" },
+        "lastLogin": { "type": "string" }
+      },
+      "required": ["id", "name", "email", "role", "active"]
+    },
+    "AuditLog": {
+      "title": "AuditLog",
+      "description": "Registro de auditoria e operações realizadas no sistema",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "timestamp": { "type": "string" },
+        "userName": { "type": "string" },
+        "action": { "type": "string" },
+        "details": { "type": "string" },
+        "type": { "type": "string" }
+      },
+      "required": ["id", "timestamp", "userName", "action", "details"]
+    }
+  },
+  "firestore": {
+    "/products/{productId}": {
+      "schema": "Product",
+      "description": "Coleção de materiais e produtos do catálogo"
+    },
+    "/orders/{orderId}": {
+      "schema": "Order",
+      "description": "Coleção de pedidos e orçamentos"
+    },
+    "/vehicles/{vehicleId}": {
+      "schema": "Vehicle",
+      "description": "Coleção da frota de veículos"
+    },
+    "/freights/{freightId}": {
+      "schema": "Freight",
+      "description": "Tabela de fretes e bairros atendidos"
+    },
+    "/storeConfig/{configId}": {
+      "schema": "StoreConfig",
+      "description": "Documentos de configuração da loja"
+    },
+    "/adminUsers/{userId}": {
+      "schema": "AdminUser",
+      "description": "Usuários e operadores administrativos"
+    },
+    "/auditLogs/{logId}": {
+      "schema": "AuditLog",
+      "description": "Logs de auditoria e atividades"
+    }
+  }
+}
